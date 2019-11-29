@@ -3,7 +3,7 @@ node {
 	def GIT_COMMIT
   stage ('cloning the repository'){
 	  
-      def scm = git 'https://github.com/pnp-powership/JPetstore'
+      def scm = git 'https://github.com/hclpowership/JPetstore'
 	  GIT_COMMIT = sh(returnStdout: true, script: "git rev-parse HEAD").trim()
 	  echo "AAAA ${GIT_COMMIT}"
 	  //echo "BBBB ${scm}"
