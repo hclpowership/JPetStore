@@ -101,9 +101,10 @@ stage ('HCL One Test') {
 	// sleep 25
 	 echo 'Executing HCL One test ... '
 		// create and execute the sample jpetstore-demo on onetest engine
-	 sh '/var/jenkins_home/onetest/create-and-execute-workspace.sh PerformanceTest http://dummy.restapiexample.com/api/v1/employees'
+	 //sh '/var/jenkins_home/onetest/create-and-execute-workspace.sh PerformanceTest http://dummy.restapiexample.com/api/v1/employees'
 		// execute workspace projects which are already available in onetest engine
 	 //sh '/var/jenkins_home/onetest/execute-workspace.sh <workspace name> <target application to perform tests>'
+	 sh '/var/jenkins_home/onetest/execute-workspace.sh PerformanceTest http://dummy.restapiexample.com/api/v1/employees'
  }
 
 }
