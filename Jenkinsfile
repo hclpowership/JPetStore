@@ -97,7 +97,7 @@ stage ("Appscan"){
 		siteName: 'ucd-server'])
  }
  
-stage ('HCL OneTest - Performance test') {
+stage ('HCL OneTest - Performance testing') {
 	// sleep 25
 	 echo 'Executing HCL One test ... '
 		// create and execute the sample jpetstore-demo on onetest engine
@@ -107,7 +107,7 @@ stage ('HCL OneTest - Performance test') {
 	sh '/var/jenkins_home/onetest/execute-workspace.sh jpetstore-demo http://35.231.22.246//:8080'
 
  }
-	stage ('HCL OneTest  - API testing') {
+	stage ('HCL OneTest  - Integration testing') {
 	// sleep 25
 	 echo 'Executing HCL One test ... '
 		// create and execute the sample jpetstore-demo on onetest engine
