@@ -104,7 +104,7 @@ stage ('HCL OneTest - Performance testing') {
 	 //sh '/var/jenkins_home/onetest/create-and-execute-workspace.sh PerformanceTest http://dummy.restapiexample.com/api/v1/employees'
 		// execute workspace projects which are already available in onetest engine
 	 //sh '/var/jenkins_home/onetest/execute-workspace.sh <workspace name> <target application to perform tests>'
-	sh '/var/jenkins_home/onetest/execute-workspace.sh jpetstore-demo http://35.231.22.246//:8080'
+	sh '/var/jenkins_home/onetest/execute-workspace.sh jpetstore-demo http://34.73.143.38 //:8080'
 
  }
 	stage ('HCL OneTest  - Integration testing') {
