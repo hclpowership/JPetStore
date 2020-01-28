@@ -22,7 +22,19 @@ node {
 	     
     }
   }
-  
+  stage('JUnit'){
+  step([$class: 'UploadMetricsFile',
+  filePath: 'target/surefire-reports/TEST-org.mybatis.jpetstore.service.OrderServiceTest.xml',
+  pluginType: 'junitXML',
+  dataFormat: 'junitXML',
+  tenantId: '5ade13625558f2c6688d15ce',
+  appName: 'Customer Registration',
+   name: "${majorVersion} - JUnit Test",
+   testSetName: 'Quick Test Suite',
+    metricsRecordUrl: [To allow a link to show in the UI to redirect the user to external page ex: BUILD_URL]
+    ])
+   curl --request POST  --url https://velocity.35.229.37.36.nip.io/reporting-consumer/qualityData  --form 'payload={"tenant_id":"5ade13625558f2c6688d15ce","application":{"name":"JPetStore Demo 6"},"environment":"Prod","build":{"url":"https://jenkins.35.229.37.36.nip.io"},"record":{"metricDefinitionId":"FUNCTIONALTEST","category":"Functional Tests","pluginType":"junitXML","dataFormat":"junitXML"}}' -k --form testArtifact=@selenium.xml
+}
 
   stage ('Cucumber'){
 	  withMaven(jdk: 'JDK_local', maven: 'MVN_Local') {
