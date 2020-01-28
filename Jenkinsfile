@@ -32,7 +32,7 @@ node {
                                 tenant_id: "5ade13625558f2c6688d15ce",
                                 appName: "JPetStore",
                                 //appExtId: "4b006cdb-0e50-43f2-ac87-a7586a65389e",
-                                                            //appExtId: "c7a19797-024b-4a22-8994-f4d8c8f95724",
+                                                            appExtId: "a24582d9-8b92-4390-9021-eff8f0e02e8e",
                                                             //appId: "acdfae67-616f-43e5-8872-2cfa3aa583de",    
                                 name: "Executed in JUnit - 3.0.${BUILD_NUMBER}",
                                 testSetName: "Junit Test Run from Jenkins"]
