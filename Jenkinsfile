@@ -30,7 +30,7 @@ node {
                         // Need to change the path of the test result xml result required.               
                                 filePath: "target/surefire-reports/*.xml",
                                 tenant_id: "5ade13625558f2c6688d15ce",
-                                appName: "JPetStore",
+                                appName: "Aruna",
                                 //appExtId: "4b006cdb-0e50-43f2-ac87-a7586a65389e",
                                                             appExtId: "a24582d9-8b92-4390-9021-eff8f0e02e8e",
                                                             //appId: "acdfae67-616f-43e5-8872-2cfa3aa583de",    
