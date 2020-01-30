@@ -119,11 +119,11 @@ stage ("Appscan"){
  }
  
 stage ('HCL OneTest') {
-	 sleep 25
+	// sleep 25
 	 echo 'Executing HCL One test ... '
 		// execute workspace projects which are already available in onetest engine
 	 //sh '/var/jenkins_home/onetest/execute-workspace.sh <workspace name> <target application to perform tests>'
-	sh '/var/jenkins_home/onetest/execute-workspace.sh FunctionalTest http://35.237.56.186:8080'
+	sh '/var/jenkins_home/onetest/execute-workspace.sh jpetstore-demo http://35.237.56.186:8080'
 
  }
 	
