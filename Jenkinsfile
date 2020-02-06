@@ -17,7 +17,7 @@ node {
       withMaven(jdk: 'JDK_local', maven: 'MVN_Local') {
       sh 'mvn clean package'
 	      echo "**** ${GIT_COMMIT}"
-	//step($class: 'UploadBuild', tenantId: "5ade13625558f2c6688d15ce", revision: "${GIT_COMMIT}", appName: "JPetStore", requestor: "admin", id: "${newComponentVersionId}" )
+	//step($class: 'UploadBuild', tenantId: "5ade13625558f2c6688d15ce", revision: "${GIT_COMMIT}", appName: "PROJECT_NAME", requestor: "admin", id: "${newComponentVersionId}" )
 	
 	     
     }
@@ -67,8 +67,8 @@ node {
 	
 	
 stage ("Appscan"){
-	sleep 40
-	 appscan application: '84963f4f-0cf4-4262-9afe-3bd7c0ec3942', credentials: 'Credential for ASOC', failBuild: true, failureConditions: [failure_condition(failureType: 'high', threshold: 100)], name: '84963f4f-0cf4-4262-9afe-3bd7c0ec39426367', scanner: static_analyzer(hasOptions: false, target: '/var/jenkins_home/jobs/jpetstore'), type: 'Static Analyzer', wait: true
+	//sleep 40
+	 //appscan application: '84963f4f-0cf4-4262-9afe-3bd7c0ec3942', credentials: 'Credential for ASOC', failBuild: true, failureConditions: [failure_condition(failureType: 'high', threshold: 100)], name: '84963f4f-0cf4-4262-9afe-3bd7c0ec39426367', scanner: static_analyzer(hasOptions: false, target: '/var/jenkins_home/jobs/jpetstore'), type: 'Static Analyzer', wait: true
  }
   stage('Publish Artificats to UCD'){
 	  
@@ -76,11 +76,11 @@ stage ("Appscan"){
         siteName: 'ucd-server',
         component: [
             $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
-            componentName: 'JpetComponent',
+            componentName: 'PROJECT_NAMEComponent',
             createComponent: [
                 $class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
                 componentTemplate: '',
-                componentApplication: 'JPetStore'
+                componentApplication: 'PROJECT_NAME'
             ],
             delivery: [
                 $class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
@@ -102,21 +102,21 @@ stage ("Appscan"){
 	echo "(*****)"
 	  echo "${UUID}"
 	
-	  echo "Demo1234 ${JpetComponent_VersionId}"
-	  def newComponentVersionId = "${JpetComponent_VersionId}"
-	  step($class: 'UploadBuild', tenantId: "5ade13625558f2c6688d15ce", revision: "${GIT_COMMIT}", appName: "JPetStore", requestor: "admin", id: "${newComponentVersionId}" )
+	  echo "Demo1234 ${PROJECT_NAMEComponent_VersionId}"
+	  def newComponentVersionId = "${PROJECT_NAMEComponent_VersionId}"
+	  step($class: 'UploadBuild', tenantId: "5ade13625558f2c6688d15ce", revision: "${GIT_COMMIT}", appName: "PROJECT_NAME", requestor: "admin", id: "${newComponentVersionId}" )
 	  echo "Demo123 ${newComponentVersionId}"
 	sleep 25
 	  step([$class: 'UCDeployPublisher',
 		deploy: [ createSnapshot: [deployWithSnapshot: true, 
 			 snapshotName: "1.${BUILD_NUMBER}"],
-			 deployApp: 'JPetStore', 
+			 deployApp: 'PROJECT_NAME', 
 			 deployDesc: 'Requested from Jenkins', 
-			 deployEnv: 'JPetStore_Dev', 
+			 deployEnv: 'PROJECT_NAME_Dev', 
 			 deployOnlyChanged: false, 
 			 deployProc: 'Deploy', 
 			 deployReqProps: '', 
-			 deployVersions: "JpetComponent:1.${BUILD_NUMBER}"], 
+			 deployVersions: "PROJECT_NAMEComponent:1.${BUILD_NUMBER}"], 
 		siteName: 'ucd-server'])
  }
  
