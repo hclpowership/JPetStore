@@ -76,11 +76,11 @@ stage ("Appscan"){
         siteName: 'ucd-server',
         component: [
             $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
-            componentName: 'PROJECT_NAMEComponent',
+            componentName: 'JPetStoreComponent',
             createComponent: [
                 $class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
                 componentTemplate: '',
-                componentApplication: 'PROJECT_NAME'
+                componentApplication: 'JPetStore'
             ],
             delivery: [
                 $class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
@@ -102,21 +102,21 @@ stage ("Appscan"){
 	echo "(*****)"
 	  echo "${UUID}"
 	
-	  echo "Demo1234 ${PROJECT_NAMEComponent_VersionId}"
-	  def newComponentVersionId = "${PROJECT_NAMEComponent_VersionId}"
-	  step($class: 'UploadBuild', tenantId: "5ade13625558f2c6688d15ce", revision: "${GIT_COMMIT}", appName: "PROJECT_NAME", requestor: "admin", id: "${newComponentVersionId}" )
+	  echo "Demo1234 ${JPetStoreComponent_VersionId}"
+	  def newComponentVersionId = "${JPetStoreComponent_VersionId}"
+	  step($class: 'UploadBuild', tenantId: "5ade13625558f2c6688d15ce", revision: "${GIT_COMMIT}", appName: "JPetStore", requestor: "admin", id: "${newComponentVersionId}" )
 	  echo "Demo123 ${newComponentVersionId}"
 	sleep 25
 	  step([$class: 'UCDeployPublisher',
 		deploy: [ createSnapshot: [deployWithSnapshot: true, 
 			 snapshotName: "1.${BUILD_NUMBER}"],
-			 deployApp: 'PROJECT_NAME', 
+			 deployApp: 'JPetStore', 
 			 deployDesc: 'Requested from Jenkins', 
-			 deployEnv: 'PROJECT_NAME_Dev', 
+			 deployEnv: 'JPetStore_Dev', 
 			 deployOnlyChanged: false, 
 			 deployProc: 'Deploy', 
 			 deployReqProps: '', 
-			 deployVersions: "PROJECT_NAMEComponent:1.${BUILD_NUMBER}"], 
+			 deployVersions: "JPetStoreComponent:1.${BUILD_NUMBER}"], 
 		siteName: 'ucd-server'])
  }
  
