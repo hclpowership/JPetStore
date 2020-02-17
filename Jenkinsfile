@@ -112,7 +112,7 @@ stage ("Appscan"){
 stage ('HCL OneTest - Performance testing') {
 	// sleep 25
 	echo 'Executing HCL One test ... '
-	sh '/var/jenkins_home/onetest/execute-workspace.sh jpetstore-demo http://35.229.37.36:8080'
+	sh '/var/jenkins_home/onetest/execute-workspace.sh jpetstore-demo http://35.237.53.100:8080'
  }
 	
 
