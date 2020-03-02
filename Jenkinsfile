@@ -110,7 +110,7 @@ stage ("Appscan"){
  }
 
 stage ("Appscan DAST"){
-	appscan application: '84963f4f-0cf4-4262-9afe-3bd7c0ec3942', credentials: 'Credential for ASOC', failBuild: true, failureConditions: [failure_condition(failureType: 'high', threshold: 100)], name: 'Dast', scanner: dynamic_analyzer(hasOptions: false, scanType: 'Staging', target: 'http://35.231.184.186:8080/jpetstore'), type: 'Dynamic Analyzer'
+//	appscan application: '84963f4f-0cf4-4262-9afe-3bd7c0ec3942', credentials: 'Credential for ASOC', failBuild: true, failureConditions: [failure_condition(failureType: 'high', threshold: 100)], name: 'Dast', scanner: dynamic_analyzer(hasOptions: false, scanType: 'Staging', target: 'http://35.231.184.186:8080/jpetstore'), type: 'Dynamic Analyzer'
 }
 stage ('HCL OneTest - Performance testing') {
 	// sleep 25
