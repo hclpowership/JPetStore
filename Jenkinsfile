@@ -110,13 +110,13 @@ stage ("Appscan"){
  }
 
 stage ("Appscan DAST"){
-	// appscan application: '84963f4f-0cf4-4262-9afe-3bd7c0ec3942', credentials: 'Credential for ASOC', failBuild: true, failureConditions: [failure_condition(failureType: 'high', threshold: 100)], name: 'Dast', scanner: dynamic_analyzer(hasOptions: false, scanType: 'Staging', target: 'http://35.237.14.216:8080/jpetstore'), type: 'Dynamic Analyzer'
+	appscan application: '84963f4f-0cf4-4262-9afe-3bd7c0ec3942', credentials: 'Credential for ASOC', failBuild: true, failureConditions: [failure_condition(failureType: 'high', threshold: 100)], name: 'Dast', scanner: dynamic_analyzer(hasOptions: false, scanType: 'Staging', target: 'http://35.231.119.193:8080/jpetstore'), type: 'Dynamic Analyzer'
 }
 	
-stage ('HCL OneTest - Performance testing') {
+stage ('HCL OneTest') {
 	// sleep 25
 	echo 'Executing HCL One test ... '
-	// sh '/var/jenkins_home/onetest/execute-workspace.sh jpetstore-demo http://35.237.14.216:8080'
+	 sh '/var/jenkins_home/onetest/execute-workspace.sh jpetstore-demo http://35.231.119.193:8080'
  }
 
 }
