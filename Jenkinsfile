@@ -17,12 +17,12 @@ node {
       withMaven(jdk: 'JDK_local', maven: 'MVN_Local') {
       sh 'mvn clean package'
 	      echo "**** ${GIT_COMMIT}"
-	//step($class: 'UploadBuild', tenantId: "5ade13625558f2c6688d15ce", revision: "${GIT_COMMIT}", appName: "JPetStore", requestor: "admin", id: "${newComponentVersionId}" )
+	//step($class: 'UploadBuild', tenantId: "5ade13625558f2c6688d15ce", revision: "${GIT_COMMIT}", appName: "PROJECT_NAME", requestor: "admin", id: "${newComponentVersionId}" )
 	
 	     
     }
   }
- stage('JUnit'){
+  stage('JUnit'){
 		echo("************************** Test Result Upload Started to Velocity****************************")
                         try{
                         step([$class: 'UploadJUnitTestResult',
@@ -31,7 +31,7 @@ node {
                                 filePath: "target/surefire-reports/TEST-org.mybatis.jpetstore.service.OrderServiceTest.xml",
                                 tenant_id: "5ade13625558f2c6688d15ce",
                                 appName: "JPetStore",
-                                //appExtId: "4b006cdb-0e50-43f2-ac87-a7586a65389e",
+                                //appExtId: "4b006cdb-0e50-43f2-ac87-a7586a65389e",    
                                 name: "Executed in JUnit - 3.0.${BUILD_NUMBER}",
                                 testSetName: "Junit Test Run from Jenkins"]
                            
@@ -43,17 +43,6 @@ node {
 
 		
 	}
-  
-
-  stage ('Cucumber'){
-	  withMaven(jdk: 'JDK_local', maven: 'MVN_Local') {
-		  sh 'mvn test -Dtest=Runner'    
-	  }
-		cucumber buildStatus: "Success",
-			fileIncludePattern: "**/cucumber.json",
-			jsonReportDirectory: 'target'
-
-  }
 
 	stage('SonarQube Analysis'){
 		def mvnHome = tool name : 'MVN_Local', type:'maven'
@@ -74,7 +63,7 @@ stage ("Appscan"){
         siteName: 'ucd-server',
         component: [
             $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
-            componentName: 'JpetComponent',
+            componentName: 'JPetStoreComponent',
             createComponent: [
                 $class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
                 componentTemplate: '',
@@ -100,8 +89,8 @@ stage ("Appscan"){
 	echo "(*****)"
 	  echo "${UUID}"
 	
-	  echo "Demo1234 ${JpetComponent_VersionId}"
-	  def newComponentVersionId = "${JpetComponent_VersionId}"
+	  echo "Demo1234 ${JPetStoreComponent_VersionId}"
+	  def newComponentVersionId = "${JPetStoreComponent_VersionId}"
 	  step($class: 'UploadBuild', tenantId: "5ade13625558f2c6688d15ce", revision: "${GIT_COMMIT}", appName: "JPetStore", requestor: "admin", id: "${newComponentVersionId}" )
 	  echo "Demo123 ${newComponentVersionId}"
 	sleep 25
@@ -114,19 +103,19 @@ stage ("Appscan"){
 			 deployOnlyChanged: false, 
 			 deployProc: 'Deploy', 
 			 deployReqProps: '', 
-			 deployVersions: "JpetComponent:1.${BUILD_NUMBER}"], 
+			 deployVersions: "JPetStoreComponent:1.${BUILD_NUMBER}"], 
 		siteName: 'ucd-server'])
  }
- 
+
+stage ("Appscan DAST"){
+	// appscan application: '84963f4f-0cf4-4262-9afe-3bd7c0ec3942', credentials: 'Credential for ASOC', failBuild: true, failureConditions: [failure_condition(failureType: 'high', threshold: 100)], name: 'Dast', scanner: dynamic_analyzer(hasOptions: false, scanType: 'Staging', target: 'http://35.231.119.193:8080/jpetstore'), type: 'Dynamic Analyzer'
+}
+	
 stage ('HCL OneTest') {
 	// sleep 25
-	 echo 'Executing HCL One test ... '
-		// execute workspace projects which are already available in onetest engine
-	 //sh '/var/jenkins_home/onetest/execute-workspace.sh <workspace name> <target application to perform tests>'
-	sh '/var/jenkins_home/onetest/execute-workspace.sh jpetstore-demo http://35.237.56.186:8080'
-
+	echo 'Executing HCL One test ... '
+	 sh '/var/jenkins_home/onetest/execute-workspace.sh jpetstore-demo http://35.231.119.193:8080'
  }
-	
 
 }
 
